@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 
 using MediatR;
 
-using System.Reflection;
 using Persistence.Context;
 
 var builder = WebApplication.CreateBuilder(args);

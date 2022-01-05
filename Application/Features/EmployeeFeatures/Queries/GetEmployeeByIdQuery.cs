@@ -1,7 +1,9 @@
-﻿using Application.DTOs.Response;
-using Domain;
+﻿using Microsoft.EntityFrameworkCore;
+
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+
+using Application.DTOs.Response;
+using Domain;
 using Persistence.Context;
 
 namespace Application.Features.EmployeeFeatures.Queries

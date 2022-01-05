@@ -3,7 +3,6 @@
 using MediatR;
 
 using Persistence.Context;
-using Application.Exceptions;
 using Application.DTOs.Response;
 using Domain;
 

@@ -1,7 +1,7 @@
-﻿using Application.DTOs.Response;
-using Domain;
-using MediatR;
+﻿using MediatR;
 
+using Application.DTOs.Response;
+using Domain;
 using Persistence.Context;
 
 namespace Application.Features.EmployeeFeatures.Commands.UpdateEmployee

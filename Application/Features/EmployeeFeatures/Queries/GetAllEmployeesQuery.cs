@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using MediatR;
+
 using Domain;
 using Persistence.Context;
 

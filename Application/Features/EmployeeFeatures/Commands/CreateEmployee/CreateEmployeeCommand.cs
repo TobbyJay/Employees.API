@@ -1,6 +1,7 @@
-﻿using Application.DTOs.Response;
+﻿using MediatR;
+
+using Application.DTOs.Response;
 using Domain;
-using MediatR;
 
 namespace Application.Features.EmployeeFeatures.Commands.CreateEmployee
 {

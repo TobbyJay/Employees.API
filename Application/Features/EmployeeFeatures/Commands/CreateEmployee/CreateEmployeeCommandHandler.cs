@@ -1,7 +1,6 @@
 ﻿using MediatR;
 
 using Domain;
-
 using Persistence.Context;
 using Application.DTOs.Response;
 

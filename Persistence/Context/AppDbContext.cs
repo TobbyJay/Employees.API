@@ -1,6 +1,6 @@
-﻿using Domain;
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
+using Domain;
 
 namespace Persistence.Context
 {
