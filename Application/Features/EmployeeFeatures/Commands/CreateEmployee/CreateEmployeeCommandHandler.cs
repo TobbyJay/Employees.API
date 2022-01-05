@@ -11,9 +11,9 @@ namespace Application.Features.EmployeeFeatures.Commands.CreateEmployee
         {
             _context = context;
         }
-        public Task<Guid> Handle(CreateEmployeeCommand command, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateEmployeeCommand command, CancellationToken cancellationToken)
         {
-            var employee = CreateNewEmployee(command, _context);
+            var employee = await CreateNewEmployee(command, _context);
 
             return employee;
         }

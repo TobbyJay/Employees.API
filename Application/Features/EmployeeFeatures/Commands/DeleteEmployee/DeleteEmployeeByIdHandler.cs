@@ -13,9 +13,9 @@ namespace Application.Features.EmployeeFeatures.Commands.DeleteEmployee
         {
             _context = context;
         }
-        public Task<Guid> Handle(DeleteEmployeeByIdCommand command, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(DeleteEmployeeByIdCommand command, CancellationToken cancellationToken)
         {
-            var employee = DeleteSingleEmployee(command,_context);
+            var employee = await DeleteSingleEmployee(command,_context);
 
             return employee;
         }
@@ -27,7 +27,7 @@ namespace Application.Features.EmployeeFeatures.Commands.DeleteEmployee
             _context.Employees!.Remove(getEmployee!);
             await _context.SaveChangesAsync();
 
-            return getEmployee.EmployeeId;
+            return getEmployee!.EmployeeId;
         }
     }
 }
