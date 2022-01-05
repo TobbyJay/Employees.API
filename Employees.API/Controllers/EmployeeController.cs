@@ -17,8 +17,6 @@ namespace Employees.API.Controllers
        
 
         [HttpGet]
-        [Route("api/employee")]
-
         public async Task<IActionResult> Employees()
         {
             var result = await Mediator.Send(new GetAllEmployeesQuery());
@@ -26,32 +24,27 @@ namespace Employees.API.Controllers
         }
 
         [HttpPost]
-        [Route("api/create")]
-
-        public async Task<IActionResult> CreateEmployee(CreateEmployeeCommand command)
+        public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeCommand command)
         {
             var result = await Mediator.Send(command);
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("api/getemployee/{employeeId}")]
+        [HttpGet("{employeeId}", Name = "GetEmployee")]
         public async Task<IActionResult> GetEmployee(Guid employeeId)
         {
             var result = await Mediator.Send(new GetEmployeeByIdQuery { Id = employeeId });
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("api/deleteemployee/{employeeId}")]
+        [HttpDelete("{employeeId}", Name = "DeleteEmployee")]
         public async Task<IActionResult> DeleteEmployee(Guid employeeId)
         {
             var result = await Mediator.Send(new DeleteEmployeeByIdCommand { EmployeeId = employeeId });
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("api/updateemployee/{employeeId}")]
+        [HttpPut("{employeeId}", Name = "UpdateEmployee")]
         public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeCommand command, Guid employeeId)
         {
             if (employeeId != command.EmployeeId) return NoContent();

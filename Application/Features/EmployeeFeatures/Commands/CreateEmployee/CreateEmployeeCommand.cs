@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿using Application.DTOs.Response;
+using Domain;
+using MediatR;
 
 namespace Application.Features.EmployeeFeatures.Commands.CreateEmployee
 {
-    public class CreateEmployeeCommand : IRequest<Guid>
+    public class CreateEmployeeCommand : IRequest<ApiResponseDTO<Employee>>
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

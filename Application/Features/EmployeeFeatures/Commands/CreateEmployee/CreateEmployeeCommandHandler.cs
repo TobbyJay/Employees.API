@@ -1,26 +1,31 @@
-﻿
+﻿using MediatR;
+
 using Domain;
-using MediatR;
+
 using Persistence.Context;
+using Application.DTOs.Response;
 
 namespace Application.Features.EmployeeFeatures.Commands.CreateEmployee
 {
 
-        public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, Guid>
+        public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, ApiResponseDTO<Employee>>
         {
             private readonly IAppDbContext _context;
             public CreateEmployeeCommandHandler(IAppDbContext context)
             {
                 _context = context;
             }
-            public async Task<Guid> Handle(CreateEmployeeCommand command, CancellationToken cancellationToken)
+
+            public async Task<ApiResponseDTO<Employee>> Handle(CreateEmployeeCommand command, CancellationToken cancellationToken)
             {
-                var employee = await CreateNewEmployee(command, _context);
+                var employee = await CreateNewEmployee(command);
 
                 return employee;
             }
 
-            private async Task<Guid> CreateNewEmployee(CreateEmployeeCommand command, IAppDbContext _context)
+           
+
+            private async Task<ApiResponseDTO<Employee>> CreateNewEmployee(CreateEmployeeCommand command)
             {
                 var createEmployee = new Employee();
 
@@ -36,7 +41,7 @@ namespace Application.Features.EmployeeFeatures.Commands.CreateEmployee
                 _context.Employees!.Add(createEmployee);
                 await _context.SaveChanges();
 
-                return createEmployee.EmployeeId;
+                return new ApiResponseDTO<Employee> { Status = 200, Message = "Employee Created Successfully"};
             }
         }
     
