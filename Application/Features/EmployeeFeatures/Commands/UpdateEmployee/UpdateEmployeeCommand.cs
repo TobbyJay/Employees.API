@@ -5,14 +5,14 @@ namespace Application.Features.EmployeeFeatures.Commands.UpdateEmployee
     public class UpdateEmployeeCommand : IRequest<Guid>
     {
         public Guid EmployeeId { get; set; }
-        public string FirstName { get; set; } = null!;
-        public string LastName { get; set; } = null!;
-        public string PhoneNumber { get; set; } = null!;
-        public string Address { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string Position { get; set; } = null!;
-        public string Department { get; set; } = null!;
-        public string Duty { get; set; } = null!;
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Address { get; set; }
+        public string? Email { get; set; }
+        public string? Position { get; set; }
+        public string? Department { get; set; }
+        public string? Duty { get; set; }
     }
     
 }

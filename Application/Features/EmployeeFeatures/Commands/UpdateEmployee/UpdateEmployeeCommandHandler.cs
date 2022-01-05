@@ -1,14 +1,14 @@
-﻿using MediatR;
+﻿using Domain;
+using MediatR;
 
-using Entities.Context;
-using Entities;
+using Persistence.Context;
 
 namespace Application.Features.EmployeeFeatures.Commands.UpdateEmployee
 {
     public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, Guid>
     {
-        private readonly AppDbContext _context;
-        public UpdateEmployeeCommandHandler(AppDbContext context)
+        private readonly IAppDbContext _context;
+        public UpdateEmployeeCommandHandler(IAppDbContext context)
         {
             _context = context;
         }
@@ -22,7 +22,7 @@ namespace Application.Features.EmployeeFeatures.Commands.UpdateEmployee
             return updatedEmployee;
         }
 
-        private async Task<Guid> UpdateAnEmployee(Employee? employee, UpdateEmployeeCommand command, AppDbContext context)
+        private async Task<Guid> UpdateAnEmployee(Employee? employee, UpdateEmployeeCommand command, IAppDbContext context)
         {
 
             employee.FirstName = command.FirstName;
@@ -34,7 +34,7 @@ namespace Application.Features.EmployeeFeatures.Commands.UpdateEmployee
             employee.Address = command.Address;
             employee.Email = command.Email;
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChanges();
 
             return employee.EmployeeId;
 

@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 
-namespace Entities.Context
+namespace Persistence.Context
 {
     public interface IAppDbContext
     {

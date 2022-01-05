@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain;
 
-namespace Entities.Context
+using Microsoft.EntityFrameworkCore;
+
+namespace Persistence.Context
 {
     public class AppDbContext : DbContext, IAppDbContext
     {
@@ -13,6 +15,6 @@ namespace Entities.Context
         }
 
         public async Task<int> SaveChanges() => await base.SaveChangesAsync();
-        
+
     }
 }

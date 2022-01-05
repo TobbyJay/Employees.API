@@ -1,18 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using MediatR;
-
-using Entities;
-using Entities.Context;
+using Domain;
+using Persistence.Context;
 
 namespace Application.Features.EmployeeFeatures.Queries
 {
-    public class GetAllEmployeesQuery : IRequest<IEnumerable<Employee>>
+    public partial class GetAllEmployeesQuery : IRequest<IEnumerable<Employee>>
     {
         public class GetAllEmployeesHandler : IRequestHandler<GetAllEmployeesQuery, IEnumerable<Employee>>
         {
-            private readonly AppDbContext _context;
-            public GetAllEmployeesHandler(AppDbContext context)
+            private readonly IAppDbContext _context;
+            public GetAllEmployeesHandler(IAppDbContext context)
             {
                 _context = context;
             }

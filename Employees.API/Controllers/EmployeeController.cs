@@ -11,61 +11,52 @@ using Application.Features.EmployeeFeatures.Commands.UpdateEmployee;
 
 namespace Employees.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController : BaseController
     {
-        private readonly IMediator _mediator;
-        public EmployeeController(IMediator mediator)
-        {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        }
-
+       
 
         [HttpGet]
+        [Route("api/employee")]
+
         public async Task<IActionResult> Employees()
         {
-            var result = await _mediator.Send(new GetAllEmployeesQuery());
+            var result = await Mediator.Send(new GetAllEmployeesQuery());
             return Ok(result);
         }
 
-        [HttpPost(Name = "CreateEmployee")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeCommand command)
+        [HttpPost]
+        [Route("api/create")]
+
+        public async Task<IActionResult> CreateEmployee(CreateEmployeeCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(_mediator.Send(result));
+            var result = await Mediator.Send(command);
+            return Ok(result);
         }
 
-        [HttpGet("{employeeId}", Name = "GetEmployee")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesDefaultResponseType]
+        [HttpGet]
+        [Route("api/getemployee/{employeeId}")]
         public async Task<IActionResult> GetEmployee(Guid employeeId)
         {
-            var result = await _mediator.Send(new GetEmployeeByIdQuery { EmployeeId = employeeId });
+            var result = await Mediator.Send(new GetEmployeeByIdQuery { Id = employeeId });
             return Ok(result);
         }
 
-        [HttpGet("{employeeId}", Name = "DeleteEmployee")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesDefaultResponseType]
+        [HttpGet]
+        [Route("api/deleteemployee/{employeeId}")]
         public async Task<IActionResult> DeleteEmployee(Guid employeeId)
         {
-            var result = await _mediator.Send(new DeleteEmployeeByIdCommand { EmployeeId = employeeId });
+            var result = await Mediator.Send(new DeleteEmployeeByIdCommand { EmployeeId = employeeId });
             return Ok(result);
         }
 
-        [HttpGet("{employeeId}", Name = "UpdateEmployee")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesDefaultResponseType]
+        [HttpGet]
+        [Route("api/updateemployee/{employeeId}")]
         public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeCommand command, Guid employeeId)
         {
             if (employeeId != command.EmployeeId) return NoContent();
             
-            var result = await _mediator.Send(command);
+            var result = await Mediator.Send(command);
             return Ok(result);
         }
 

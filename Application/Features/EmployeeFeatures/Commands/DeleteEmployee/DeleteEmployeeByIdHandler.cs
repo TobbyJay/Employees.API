@@ -2,14 +2,14 @@
 
 using MediatR;
 
-using Entities.Context;
+using Persistence.Context;
 
 namespace Application.Features.EmployeeFeatures.Commands.DeleteEmployee
 {
     public class DeleteEmployeeByIdHandler : IRequestHandler<DeleteEmployeeByIdCommand, Guid>
     {
-        private readonly AppDbContext _context;
-        public DeleteEmployeeByIdHandler(AppDbContext context)
+        private readonly IAppDbContext _context;
+        public DeleteEmployeeByIdHandler(IAppDbContext context)
         {
             _context = context;
         }
@@ -20,12 +20,12 @@ namespace Application.Features.EmployeeFeatures.Commands.DeleteEmployee
             return employee;
         }
 
-        private async Task<Guid> DeleteSingleEmployee(DeleteEmployeeByIdCommand command, AppDbContext context)
+        private async Task<Guid> DeleteSingleEmployee(DeleteEmployeeByIdCommand command, IAppDbContext context)
         {
             var getEmployee = await _context.Employees!.Where(e => e.EmployeeId == command.EmployeeId).FirstOrDefaultAsync() ?? default;
 
             _context.Employees!.Remove(getEmployee!);
-            await _context.SaveChangesAsync();
+            await _context.SaveChanges();
 
             return getEmployee!.EmployeeId;
         }
