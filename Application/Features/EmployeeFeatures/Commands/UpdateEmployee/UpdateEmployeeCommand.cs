@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.EmployeeFeatures.Commands
+namespace Application.Features.EmployeeFeatures.Commands.UpdateEmployee
 {
-    internal class DeleteEmployeeByIdCommand
+    internal class UpdateEmployeeCommand
     {
     }
 }

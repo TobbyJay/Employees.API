@@ -14,9 +14,4 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\EmployeeFeatures\Commands\DeleteEmployee\" />
-    <Folder Include="Features\EmployeeFeatures\Commands\UpdateEmployee\" />
-  </ItemGroup>
-
 </Project>
