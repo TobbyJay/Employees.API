@@ -20,21 +20,21 @@ namespace Employees.API.Controllers
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
-        
+
+
+        [HttpGet]
+        public async Task<IActionResult> Employees()
+        {
+            var result = await _mediator.Send(new GetAllEmployeesQuery());
+            return Ok(result);
+        }
+
         [HttpPost(Name = "CreateEmployee")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(_mediator.Send(result));
-        }
-
-       
-        [HttpGet]
-        public async Task<IActionResult> Employees()
-        {
-            var result = await _mediator.Send(new GetAllEmployeesQuery());
-            return Ok(result);
         }
 
         [HttpGet("{employeeId}", Name = "GetEmployee")]
